@@ -1,6 +1,6 @@
 Здесь будут описаны задания для стажировки и названия их веток:
 
-### reon-second-assignment
+## B_task-2_contact-age-calculation
 
 Техническое задание для первичного ознакомления с amoCRM
 
@@ -20,5 +20,4 @@
 Полезные ссылки:
 frontend - https://gitlab.reon.pro/digitalsales-inc/Frontend-boiler-plates/-/tree/main?ref_type=heads
 backend (old) - https://gitlab.reon.pro/digitalsa=les-inc/boilerplate/-/tree/main?ref_type=heads
-https://www.amocrm.ru/developers/content/crm_platform/platform-abilities 
-
+https://www.amocrm.ru/developers/content/crm_platform/platform-abilities
