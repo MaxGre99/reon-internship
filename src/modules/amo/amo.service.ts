@@ -66,34 +66,48 @@ export class AmoService {
         return this.accessToken;
     }
 
-    public async getContact(id: number): Promise<AmoContact> {
+    private async withAuth<T>(request: (token: string) => Promise<T>): Promise<T> {
         const token = await this.getAccessToken();
+        try {
+            return await request(token);
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response?.status === 401) {
+                this.accessToken = null;
+                const newToken = await this.refreshAccessToken();
+                return await request(newToken);
+            }
+            throw error;
+        }
+    }
 
-        const response = await axios.get<AmoContact>(`${this.rootPath}/api/v4/contacts/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-
-        return response.data;
+    public async getContact(id: number): Promise<AmoContact> {
+        return this.withAuth((token) =>
+            axios
+                .get<AmoContact>(`${this.rootPath}/api/v4/contacts/${id}`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                })
+                .then((res) => res.data)
+        );
     }
 
     public async updateContact(id: number, fields: AmoCustomField[]): Promise<void> {
-        const token = await this.getAccessToken();
-
-        await axios.patch(
-            `${this.rootPath}/api/v4/contacts`,
-            [
-                {
-                    id,
-                    custom_fields_values: fields,
-                },
-            ],
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
+        return this.withAuth((token) =>
+            axios
+                .patch(
+                    `${this.rootPath}/api/v4/contacts`,
+                    [
+                        {
+                            id,
+                            custom_fields_values: fields,
+                        },
+                    ],
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                )
+                .then((res) => res.data)
         );
     }
 }
