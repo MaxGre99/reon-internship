@@ -6,14 +6,14 @@ import { appSchema } from './app.schema';
 import { HookModule } from '../modules/hook/hook.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      validationSchema: appSchema,
-    }),
-    HookModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+            validationSchema: appSchema,
+        }),
+        HookModule,
+    ],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}

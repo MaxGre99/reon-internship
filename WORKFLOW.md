@@ -10,3 +10,4 @@
 | AUTH_CODE     | string | Одноразовый код авторизации amoCRM (живёт 20 минут)     |
 | REDIRECT_URI  | string | URI редиректа, указанный в настройках интеграции amoCRM |
 | SUB_DOMAIN    | string | Субдомен аккаунта amoCRM                                |
+
