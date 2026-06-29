@@ -16,3 +16,6 @@ logs/
 # IDE
 .idea/
 .vscode/
+
+# amoCRM keys
+amo_token.json
