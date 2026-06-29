@@ -1,7 +1,8 @@
 import * as Joi from 'joi';
 import { Env } from '../shared/enums/env.enum';
+import { AppConfig } from './app.types';
 
-export const appSchema = Joi.object({
+export const appSchema = Joi.object<AppConfig>({
     [Env.Port]: Joi.number().default(3000),
     [Env.ClientId]: Joi.string().required(),
     [Env.ClientSecret]: Joi.string().required(),

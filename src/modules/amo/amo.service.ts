@@ -4,6 +4,7 @@ import { Env } from '../../shared/enums/env.enum';
 import * as fs from 'fs';
 import { AmoContact, AmoToken, AmoCustomField } from './amo.types';
 import axios from 'axios';
+import { AppConfig } from '../../app/app.types';
 
 const TOKEN_PATH = 'amo_token.json';
 
@@ -15,7 +16,7 @@ export class AmoService {
 
     private refreshToken: string | null = null;
 
-    constructor(private readonly configService: ConfigService) {
+    constructor(private readonly configService: ConfigService<AppConfig>) {
         this.rootPath = `https://${this.configService.get<string>(Env.SubDomain)}.amocrm.ru`;
     }
 
