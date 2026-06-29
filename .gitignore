@@ -1,0 +1,21 @@
+# compiled output
+dist/
+node_modules/
+
+# env
+.env
+.env.*
+
+# logs
+logs/
+*.log
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# amoCRM keys
+amo_token.json
