@@ -56,9 +56,13 @@ export class HookService {
                 return sum;
             }
 
-            const priceField = contactFields.find((f) => f.field_id === contactFieldId);
+            const priceFieldValue = Number(contactFields.find((f) => f.field_id === contactFieldId)?.values?.[0].value ?? 0);
 
-            return sum + (priceField ? Number(priceField.values[0].value) : 0);
+            if (!priceFieldValue || isNaN(priceFieldValue) || !isFinite(priceFieldValue)) {
+                return sum;
+            }
+
+            return sum + priceFieldValue;
         }, 0);
 
         const currentBudget = deal.price;
