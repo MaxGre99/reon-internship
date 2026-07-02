@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AppConfig } from '../../app/app.types';
-import type { AmoToken } from '../widget/widget.types';
+import { AmoToken } from './amo.types';
 import axios from 'axios';
 import { Env } from '../../shared/enums/env.enum';
 
