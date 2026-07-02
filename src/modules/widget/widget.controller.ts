@@ -1,14 +1,14 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { WidgetService } from './widget.service';
 import type { InstallQuery, RemoveQuery } from './widget.types';
+import { Endpoints } from '../../shared/constants/endpoints';
 
-@Controller('widget')
+@Controller(Endpoints.Widget.Base)
 export class WidgetController {
     constructor(private readonly widgetService: WidgetService) {}
 
-    @Get('install')
+    @Get(Endpoints.Widget.Install)
     public async install(@Query() query: InstallQuery): Promise<{ status: string }> {
-        // console.log('Widget install query:', query);
         const { code, referer } = query;
         const subdomain = referer.replace('.amocrm.ru', '');
         void this.widgetService.install(code, subdomain).catch((err: unknown) => {
@@ -17,9 +17,8 @@ export class WidgetController {
         return { status: 'ok' };
     }
 
-    @Get('remove')
+    @Get(Endpoints.Widget.Remove)
     public async remove(@Query() query: RemoveQuery): Promise<{ status: string }> {
-        // console.log('Widget remove query:', query);
         void this.widgetService.remove(query.account_id).catch((err: unknown) => {
             console.error('Remove error:', err);
         });
